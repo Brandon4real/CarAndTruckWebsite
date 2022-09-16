@@ -39,7 +39,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-##CONFIGURE TABLE
+##CONFIGURE TABLES
 class User(UserMixin, db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
@@ -209,7 +209,7 @@ def add_new_post():
 
     return render_template("upload.html", form=form, current_user=current_user, uuid_key=uuid)
 
-
+# CODE NOT WORKING
 @app.route("/post/<int:post_id>/<uuid_key>", methods=["GET", "POST"])
 def show_post(post_id, uuid_key):
     form = CommentForm()

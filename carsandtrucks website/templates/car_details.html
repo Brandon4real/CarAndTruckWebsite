@@ -35,7 +35,7 @@
   <div class="carousel-inner">
     <div class="carousel-item active" data-bs-interval="3000">
 
-      <img src="{{ url_for('static', filename='/uploads/{}/{}'.format(uuid, file)) }}" class="d-block w-100" alt="...">
+      <img src="{{ url_for('static', filename='/uploads/{}/{}'.format(uuid_key, file)) }}" class="d-block w-100" alt="file">
     </div>
 
     </div>
@@ -50,10 +50,10 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+
 {% endfor %}
 
 </div>
-
 
 
 
@@ -93,7 +93,7 @@
                     <div class="clearfix">
                          <span class="pull-left"> Model</span>
 
-                         <strong class="pull-right"></strong>
+                         <strong class="pull-right">{{post.uuid_key}}</strong>
                     </div>
                </li>
 

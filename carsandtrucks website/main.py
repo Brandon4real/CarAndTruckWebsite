@@ -214,18 +214,17 @@ def add_new_post():
 def show_post(post_id, uuid_key):
     form = CommentForm()
     requested_post = BlogPost.query.get(post_id)
-    uuid = BlogPost.query.get(uuid_key)
+    location = "static/uploads/{}".format(uuid_key)
+    if not os.path.isdir(location):
+        return "Error! {} not found!".format(location)
 
     files = []
-    for uuid in glob.glob("{}/*.*".format(app.config['UPLOAD_FOLDER'])):
-        if not os.path.isdir(app.config['UPLOAD_FOLDER']):
-            return "Error! {} not found!".format(app.config['UPLOAD_FOLDER'])
-        else:
-            for file in app.config['UPLOAD_FOLDER']:
-                fname = file
-                files.append(fname)
-            print(files)
-
+    for file in glob.glob("{}/*.*".format(location)):
+        fname = file.split(os.sep)[-1]
+        files.append(fname)
+    print(files)
+    print(uuid_key)
+    print(post_id)
     if form.validate_on_submit():
         if not current_user.is_authenticated:
             flash("You need to login or register to comment.")
@@ -240,7 +239,7 @@ def show_post(post_id, uuid_key):
         db.session.commit()
 
     return render_template("car_details.html", post=requested_post,
-                           form=form, current_user=current_user, post_id=post_id, uuid_key=uuid, files=files)
+                           form=form, current_user=current_user, post_id=post_id, uuid_key=uuid_key, files=files)
 
 
 @app.route("/edit-post/<int:post_id>", methods=["GET", "POST"])

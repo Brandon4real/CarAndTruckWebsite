@@ -1,0 +1,49 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% include "header.html" %}
+
+{% block content %}
+   <div class="page-heading about-heading header-text" style="background-image: url(static/images/heading-6-1920x500.jpg);">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-content">
+              <h4>Sell your Truck TODAY!!</h4>
+              <h2>Your Journey begins with US!</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<h3 style="text-align:center;">Please Fill Out The Form Below</h3>
+
+<div class="container">
+    <div class="row">
+
+      <div class="col-lg-8 col-md-10 mx-auto content">
+        <div style="color: red" >
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        {{ message }}
+
+
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+          </div>
+        <form action="/upload_truck" method="POST" enctype="multipart/form-data">
+        {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+            </form>
+      </div>
+    </div>
+  </div>
+<div>
+
+</div>
+
+
+
+{% include "footer.html" %}
+{% endblock %}

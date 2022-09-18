@@ -16,7 +16,7 @@ import glob
 import time
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'hehfkjfjbjbfjejblfneln__ef___'
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 uuid_key = str(uuid.uuid4())
 UPLOAD_FOLDER = "static/uploads/{}".format(uuid_key)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -27,7 +27,7 @@ gravatar = Gravatar(app, size=100, rating='g', default='retro', force_default=Fa
                     base_url=None)
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///blog.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 login_manager = LoginManager()

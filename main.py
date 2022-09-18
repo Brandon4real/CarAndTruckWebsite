@@ -45,7 +45,7 @@ def load_user(user_id):
 class User(UserMixin, db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(100), unique=True)
+    email = db.Column(db.String(100), unique=False)
     password = db.Column(db.String(100))
     name = db.Column(db.String(100))
     posts = relationship("BlogPost", back_populates="author")

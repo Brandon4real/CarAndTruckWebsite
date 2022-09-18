@@ -13,7 +13,6 @@ import os
 from werkzeug.utils import secure_filename
 import uuid as uuid
 import glob
-import time
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")

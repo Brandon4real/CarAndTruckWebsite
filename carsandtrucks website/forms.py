@@ -32,11 +32,11 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Log Me In!")
 
 
-class TruckForm(FlaskForm):
+class UploadTruckForm(FlaskForm):
     type_of_truck = StringField("Used or Occasion Belgique", validators=[DataRequired()])
     price_of_Truck = StringField("Price of Truck", validators=[DataRequired()])
-    truck_description = StringField("Truck Type e.g 3340,MAN", validators=[DataRequired()])
-    propulsion = StringField("Petrol or Diesel", validators=[DataRequired()])
+    truck_description = StringField("Truck Type e.g Mercedes 3340,MAN Diesel", validators=[DataRequired()])
+    propulsion = StringField("Diesel or Hybrid?", validators=[DataRequired()])
     number_of_tyres = StringField("How many tyres?", validators=[DataRequired()])
     gear_box = StringField("Gear Box Type e.g Automatic", validators=[DataRequired()])
     tel_number = StringField("Telephone Number", validators=[DataRequired()])

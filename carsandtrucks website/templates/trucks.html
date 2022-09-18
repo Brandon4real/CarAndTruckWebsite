@@ -1,4 +1,78 @@
-{% include "header.html" %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/static/images/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href= "https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.css">
+      <title>Cars And Trucks Cameroon</title>
+
+    <!-- Bootstrap core CSS -->
+ <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/static/css/fontawesome.css">
+
+    <link rel="stylesheet" href="/static/css/style.css">
+       <link rel="stylesheet" href="/static/css/owl.css">
+
+
+  </head>
+
+
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+
+    <!-- Header -->
+    <header class="">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand" href="{{url_for('about')}}"><h2>Cars and  <em>Trucks Cameroon</em></h2></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url_for('home')}}">Home
+                      <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+
+                <li class="nav-item"><a class="nav-link" href="{{url_for('trucks')}}">Trucks</a></li>
+
+                <li class="nav-item"><a class="nav-link" href="{{url_for('add_new_truck')}}">Upload Truck</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{url_for('about')}}">About Us</a></li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
+
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{{url_for('blog')}}">Blog</a>
+                      <a class="dropdown-item" href="{{url_for('team')}}">Team</a>
+                      <a class="dropdown-item" href="{{url_for('testimonials')}}">Testimonials</a>
+                      <a class="dropdown-item" href="{{url_for('terms')}}">Terms</a>
+                    </div>
+                </li>
+
+                <li class="nav-item"><a class="nav-link" href="{{url_for('contact')}}">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
 
     <!-- Page Content -->
     <div class="page-heading about-heading header-text" style="background-image: url(static/images/heading-6-1920x500.jpg);">
@@ -6,7 +80,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="text-content">
-              <h4>Lorem ipsum dolor sit amet</h4>
+              <h4>Buy and Sell your Trucks with Us</h4>
               <h2>Trucks</h2>
             </div>
           </div>
@@ -135,10 +209,11 @@
                      <button type="submit" class="filled-button btn-block">Search</button>
                 </form>
              </div>
+             -->
           </div>
      </div>
 
--->
+
        <div class="alert alert-success" role="alert">
   <h4 class="alert-heading">Aww yeah!</h4>
   <p>The Website is free for all to upload cars and trucks for sale. Click on the button below if you have an item(s) for sale. You'll need to sign up first.</p>
@@ -160,122 +235,31 @@
               <a href="{{url_for('home')}}">view Cars <i class="fa fa-angle-right"></i></a>
             </div>
           </div>
+            {% for post in all_posts %}
           <div class="col-lg-4 col-md-6">
-            <div class="product-item">
-              <a href="{{url_for('home')}}"><img src="static/images/product-1-370x270.jpg" alt=""></a>
+              <div class="product-item">
+
+              <a href="{{url_for('show_truck_post',post_id=post.id,uuid_key=post.uuid_key)}}"><img src="{{post.images}}"  height="200" alt=""></a>
               <div class="down-content">
-                <a href="{{url_for('home')}}"><h4>Lorem ipsum dolor sit amet, consectetur</h4></a>
+                <a href="{{url_for('show_truck_post',post_id=post.id,uuid_key=post.uuid_key)}}"><h4>{{post.price_of_Truck}}Fcfa</h4></a>
 
-                <h6><small><del> $11199.00</del></small> $11179.00</h6>
+                <h6>{{post.truck_description}}</h6>
 
-                <p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used vehicle</p>
+                <p> &nbsp;{{post.make_of_car}}/&nbsp;{{post.propulsion}} &nbsp;/&nbsp; {{post.make_of_car}} &nbsp;/&nbsp; {{post.type_of_truck}}</p>
 
                 <small>
-                  <strong title="Author"><i class="fa fa-dashboard"></i> 130 000km</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="Author"><i class="fa fa-cube"></i> 1800cc</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="Views"><i class="fa fa-cog"></i> Manual</strong>
+                  <strong title="Author"><i class="fa fa-dashboard"></i> {{post.kilometers}}</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                  <strong title="Author"><i class="fa fa-cube"></i> No. of Tyres:{{post.number_of_tyres}}</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <strong title="Views"><i class="fa fa-cog"></i>{{post.gear_box}}</strong>
                 </small>
               </div>
             </div>
           </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="product-item">
-              <a href="{{url_for('home')}}"><img src="static/images/product-2-370x270.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="{{url_for('home')}}"><h4>Lorem ipsum dolor sit amet, consectetur</h4></a>
-
-                <h6><small><del> $11199.00</del></small> $11179.00</h6>
-
-                <p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used vehicle</p>
-
-                <small>
-                  <strong title="Author"><i class="fa fa-dashboard"></i> 130 000km</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="Author"><i class="fa fa-cube"></i> 1800cc</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="Views"><i class="fa fa-cog"></i> Manual</strong>
-                </small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="product-item">
-              <a href="{{url_for('home')}}"><img src="static/images/product-3-370x270.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="{{url_for('home')}}"><h4>Lorem ipsum dolor sit amet, consectetur</h4></a>
-
-                <h6><small><del> $11199.00</del></small> $11179.00</h6>
-
-                <p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used vehicle</p>
-
-                <small>
-                  <strong title="Author"><i class="fa fa-dashboard"></i> 130 000km</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="Author"><i class="fa fa-cube"></i> 1800cc</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="Views"><i class="fa fa-cog"></i> Manual</strong>
-                </small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="product-item">
-              <a href="{{url_for('home')}}"><img src="static/images/product-4-370x270.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="{{url_for('home')}}"><h4>Lorem ipsum dolor sit amet, consectetur</h4></a>
-
-                <h6><small><del> $11199.00</del></small> $11179.00</h6>
-
-                <p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used vehicle</p>
-
-                <small>
-                  <strong title="Author"><i class="fa fa-dashboard"></i> 130 000km</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="Author"><i class="fa fa-cube"></i> 1800cc</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="Views"><i class="fa fa-cog"></i> Manual</strong>
-                </small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="product-item">
-              <a href="{{url_for('home')}}"><img src="static/images/product-5-370x270.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="{{url_for('home')}}"><h4>Lorem ipsum dolor sit amet, consectetur</h4></a>
-
-                <h6><small><del> $11199.00</del></small> $11179.00</h6>
-
-                <p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used vehicle</p>
-
-                <small>
-                  <strong title="Author"><i class="fa fa-dashboard"></i> 130 000km</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="Author"><i class="fa fa-cube"></i> 1800cc</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="Views"><i class="fa fa-cog"></i> Manual</strong>
-                </small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="product-item">
-              <a href="{{url_for('home')}}"><img src="static/images/product-6-370x270.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="{{url_for('home')}}"><h4>Lorem ipsum dolor sit amet, consectetur</h4></a>
-
-                <h6><small><del> $11199.00</del></small> $11179.00</h6>
-
-                <p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used vehicle</p>
-
-                <small>
-                  <strong title="Author"><i class="fa fa-dashboard"></i> 130 000km</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="Author"><i class="fa fa-cube"></i> 1800cc</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="Views"><i class="fa fa-cog"></i> Manual</strong>
-                </small>
-              </div>
-            </div>
+          {% endfor %}
           </div>
         </div>
       </div>
-    </div>
+
 
     <footer>
       <div class="container">
